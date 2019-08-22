@@ -15,6 +15,11 @@ M=m/(np.linalg.norm(m))
 B=O+d*M
 D=O-d*M
 
+x=np.array([1,1])@B
+y=np.array([1,1])@D
+R=x*y
+print(R)
+
 x_AB = line_gen(A,B)
 x_BC = line_gen(B,C)
 x_CA = line_gen(C,A)
