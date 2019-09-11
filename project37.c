@@ -13,6 +13,17 @@ double** A = createMat(2,1); double** C = createMat(2,1);
 double** n = createMat(2,1);
 *n[0] = -2; *n[1] = 1; 
 
-double** O = createMat(2,1);
+double** O = (linalg_sum(A, C, 2,1));
+*O[0] /= 2;
+*O[1] /= 2;
+
+//slope of OA
+double** m = linalg_sub(A,O,2,1);
+double  d= linalg_norm(m,2 );
+
+printf("%lf",d);
  
-double** O= 0.5*(linalg_sub(double **A, double **C, int 2, int 1));
+
+print(A,2,1);
+return 0;
+}
