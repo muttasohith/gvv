@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <math.h>
 #include "coeffs.h"
-void matrix(char *str,double**x, int m,int n);
 int  main(void) 
 {
 //assaigning the given points
@@ -59,28 +58,45 @@ print(A,2,1);
 printf("a=%lf\n",a);
 printf("b=%lf\n",b);
 printf("c=%lf\n",c);
+//SAVING THE DATA OF MATRICES
+saveMat("A.dat",A,2,1);
+saveMat("B.dat",B,2,1);
+saveMat("C.dat",C,2,1);
+saveMat("D.dat",D,2,1);
 
-matrix("a.dat",omat,2,2);
+//DEFINING COORDINATES
+double **x_1=linspace(A[0][0],B[0][0],100);
+double **x_2=linspace(B[0][0],C[0][0],100);
+double **x_3=linspace(C[0][0],D[0][0],100);
+double **x_4=linspace(D[0][0],A[0][0],100);
+double **y_1=linspace(A[1][0],B[1][0],100);
+double **y_2=linspace(B[1][0],C[1][0],100);
+double **y_3=linspace(C[1][0],D[1][0],100);
+double **y_4=linspace(D[1][0],A[1][0],100);
+double **x_5=linspace(A[0][0],C[0][0],100);
+double **y_5=linspace(A[1][0],C[1][0],100);
+double **x_6=linspace(B[0][0],D[0][0],100);
+double **y_6=linspace(B[1][0],D[1][0],100);
+//print(theta,10,1);
+// saveMat(theta,"theta.dat",100,1);
+//double** line_AB= line_gen( A, B,100);
+//print(line_AB,2,100);
+
+//SAVING THE DATA
+saveMat("X_AB.dat",x_1,1,100);
+saveMat("X_BC.dat",x_2,1,100);
+saveMat("X_CD.dat",x_3,1,100);
+saveMat("X_DA.dat",x_4,1,100);
+saveMat("Y_AB.dat",y_1,1,100);
+saveMat("Y_BC.dat",y_2,1,100);
+saveMat("Y_CD.dat",y_3,1,100);
+saveMat("Y_DA.dat",y_4,1,100);
+saveMat("X_BD.dat",x_6,1,100);
+saveMat("Y_BD.dat",y_6,1,100);
+saveMat("X_AC.dat",x_5,1,100);
+saveMat("Y_AC.dat",y_5,1,100);
 return 0;
 }
 
 
 
-//Defining the function for generating uniform random numbers
-void matrix(char *str,double**x, int m,int n)
-{
-int i;
-FILE *fp;
-
-fp = fopen(str,"w");
-//Generate numbers
-for (i = 0; i < m; i++)
-{
-	for (int j = 0; j < n; j++)
-		fprintf(fp,"%lf ",x[i][j]);
-	fprintf(fp,"\n");
-}
-fclose(fp);
-
-}
-//End function for generating uniform random numbers
