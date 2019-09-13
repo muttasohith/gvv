@@ -1,3 +1,4 @@
+
 //Function declaration
 double **createMat(int m,int n);
 void readMat(double **p, int m,int n);
@@ -10,9 +11,12 @@ double **linalg_inv(double **mat, int m);
 double **matmul(double **a, double **b, int m, int n, int p);
 double **transpose(double **a,  int m, int n);
 void uniform(char *str, int len);
-void problem(char *str, int len);
 void gaussian(char *str, int len);
+void problem(char *str, int len);
 double mean(char *str);
+double **linspace(double a, double b, int c);
+void saveMat(char *str,double**x, int m,int n);
+double** line_gen(double** A,double** B,int c);
 double **linalg_div(double **a, int m, int n,double z);
 double **linalg_scamul(double **a, int m, int n,double z);
 //End function declaration
@@ -123,6 +127,7 @@ return c;
 
 }
 //End function for difference of matrices
+
 //Defining the function for sum of matrices
 
 double **linalg_sum(double **a, double **b, int m, int n)
@@ -142,50 +147,6 @@ return c;
 
 }
 //End function for sum of matrices
-
-//Defining the function for multiplication of matrice with scalar
-
-double **linalg_scamul(double **a, int m, int n,double z)
-{
-int i, j;
-double **c;
-
-c = createMat(m,n);
-
- for(i=0;i<m;i++)
- {
-  for(j=0;j<n;j++)
-  {
-c[i][j]= a[i][j]*z;
-  }
- }
-return c;
-
-}
-//End function for difference of matrices
-
-//Defining the function for inverse of 2x2 matrix
-
-//Defining the function for division of matrice with scalar
-
-double **linalg_div(double **a, int m, int n,double z)
-{
-int i, j;
-double **c;
-
-c = createMat(m,n);
-
- for(i=0;i<m;i++)
- {
-  for(j=0;j<n;j++)
-  {
-c[i][j]= a[i][j]/z;
-  }
- }
-return c;
-
-}
-//End function for difference of matrices
 
 //Defining the function for inverse of 2x2 matrix
 
@@ -275,7 +236,7 @@ fclose(fp);
 //Defining the function for calculating the mean of random numbers
 double mean(char *str)
 {
-int i=0,c;
+int i=0;
 FILE *fp;
 double x, temp=0.0;
 
@@ -294,24 +255,6 @@ return temp;
 
 }
 //End function for calculating the mean of random numbers
-
-//Defining the function for generating problem random numbers
-void problem(char *str, int len)
-{
-int i;
-FILE *fp;
-double x;
-fp = fopen(str,"w");
-//Generate numbers
-for (i = 0; i < len; i++)
-{
-x=  (double)rand()/RAND_MAX;
-fprintf(fp,"%lf\n",-2*log(1-x));
-}
-fclose(fp);
-
-}
-//End function for generating uniform random numbers
 
 //Defining the function for generating Gaussian random numbers
 void gaussian(char *str, int len)
@@ -336,3 +279,128 @@ fclose(fp);
 
 }
 //End function for generating Gaussian random numbers
+
+
+//Defining the function for generating uniform random numbers
+void problem(char *str, int len)
+{
+int i;
+FILE *fp;
+double x;
+fp = fopen(str,"w");
+//Generate numbers
+
+for (i = 0; i < len; i++)
+{
+x=(double)rand()/RAND_MAX;
+	
+fprintf(fp,"%lf\n",-2*log(1- x));
+}
+fclose(fp);
+
+}
+//End function for generating uniform random numbers
+
+//defining line space function
+double **linspace(double a, double b, int c)
+{
+    double **line=createMat(1,c);//(double *)malloc(c*sizeof(double));
+    double delta =(b-a)/(double)(c-1);
+    for (int i=0; i<c; ++i){
+            line[0][i]=a + ((double)i*delta);
+    }
+    return line;
+}
+//end function for linespace
+
+
+
+
+//Defining the function for saving afile
+void saveMat(char *str,double**x, int m,int n)
+{
+int i;
+FILE *fp;
+
+fp = fopen(str,"w");
+//Generate numbers
+for (i = 0; i < m; i++)
+{
+	for (int j = 0; j < n; j++)
+		fprintf(fp,"%lf ",x[i][j]);
+	fprintf(fp,"\n");
+}
+fclose(fp);
+
+}
+//End function for saving a file
+
+*/
+//defining linegen function
+double** line_gen(double** A,double** B,int c)
+{
+double x_1,x_2,y_1,y_2;	
+
+x_1 = A[0][0];
+y_1 = A[1][0];	
+x_2 = B[0][0];
+y_2 = B[1][0];	
+double **a=linspace(x_1,x_2,c);
+double **b=linspace(y_1,y_2,c);
+double **line = createMat(2,c);
+
+
+ 
+ for(int j=0;j<c;j++)
+  {
+line[0][j]= a[0][j];
+line[1][j]= b[0][j];
+//  printf("%lf ",c[i][j]);
+  
+ }
+return line;
+}
+//defining line_grn function
+*/
+//Defining the function for multiplication of matrice with scalar
+
+double **linalg_scamul(double **a, int m, int n,double z)
+{
+int i, j;
+double **c;
+
+c = createMat(m,n);
+
+ for(i=0;i<m;i++)
+ {
+  for(j=0;j<n;j++)
+  {
+c[i][j]= a[i][j]*z;
+  }
+ }
+return c;
+
+}
+//End function for difference of matrices
+
+//Defining the function for division of matrice with scalar
+
+double **linalg_div(double **a, int m, int n,double z)
+{
+int i, j;
+double **c;
+
+c = createMat(m,n);
+
+ for(i=0;i<m;i++)
+ {
+  for(j=0;j<n;j++)
+  {
+c[i][j]= a[i][j]/z;
+  }
+ }
+return c;
+
+}
+//End function for difference of matrices
+
