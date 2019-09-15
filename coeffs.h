@@ -335,7 +335,7 @@ fclose(fp);
 }
 //End function for saving a file
 
-*/
+
 //defining linegen function
 double** line_gen(double** A,double** B,int c)
 {
@@ -361,7 +361,7 @@ line[1][j]= b[0][j];
 return line;
 }
 //defining line_grn function
-*/
+
 //Defining the function for multiplication of matrice with scalar
 
 double **linalg_scamul(double **a, int m, int n,double z)
