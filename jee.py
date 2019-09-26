@@ -124,6 +124,9 @@ R1=R1.reshape(2,1)
 alpha=-np.array([0,2])@R1
 alpha = R2/alpha
 print(alpha)
+k=8*(alpha)
+k=1/k
+print("k",k)
 #Generating points on the circle C2
 len = 100
 theta = np.linspace(0,2*np.pi,len)
@@ -196,3 +199,4 @@ plt.grid() # minor
 plt.axis('equal')
 
 plt.show()
+
